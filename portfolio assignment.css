@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Animated Portfolio</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                scroll-behavior: smooth;
+            }
+
+            body {
+                font-family: "Poppins", sans-serif;
+                background: #080808;
+                color: white;
+                padding-bottom: 50px;
+            }
+
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 20px 5%;
+                background: rgba(10, 10, 10, 0.9);
+                box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+                animation: fadeInDown 1s ease-in-out;
+            }
+
+            .navbar a {
+                text-decoration: none;
+                color: white;
+                padding: 10px 15px;
+                font-weight: 700;
+                font-size: 1rem;
+                transition: 0.3s;
+                position: relative;
+            }
+
+            .navbar a::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                background: cyan;
+                bottom: 0;
+                left: 0;
+                transition: width 0.3s ease-in-out;
+            }
+
+            .navbar a:hover::after {
+                width: 100%;
+            }
+
+            .navbar a:hover {
+                color: cyan;
+                text-shadow: 0 0 15px cyan;
+            }
+
+            .hero-container {
+                display: grid;
+                grid-template-columns: 1fr;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                padding: 50px 5%;
+                text-align: center;
+                animation: fadeInUp 1s ease-in-out;
+            }
+
+            .hero-img img {
+                width: 100%;
+                max-width: 300px;
+                border-radius: 50%;
+                box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+                transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+            }
+
+            .hero-img img:hover {
+                transform: scale(1.1) rotate(5deg);
+                box-shadow: 0 0 50px cyan;
+            }
+
+            .info-side h1 {
+                font-size: 2.5rem;
+                font-family: "Orbitron", sans-serif;
+                color: cyan;
+                text-shadow: 0 0 20px cyan;
+                animation: textGlow 2s infinite alternate;
+            }
+
+            .info-side h3 {
+                font-size: 1.5rem;
+                margin: 10px 0;
+                color: rgba(255, 255, 255, 0.8);
+            }
+
+            .info-side p {
+                font-size: 1rem;
+                color: rgba(255, 255, 255, 0.7);
+                margin: 20px 0;
+            }
+
+            .about, .service, .contact {
+                padding: 50px 5%;
+                text-align: center;
+            }
+
+            .about h2, .service h2, .contact h2 {
+                font-size: 2.5rem;
+                color: cyan;
+                text-shadow: 0 0 20px cyan;
+                margin-bottom: 30px;
+                animation: fadeIn 1s ease-in-out;
+            }
+
+            .about-content, .service-item {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .service-box {
+                background: rgba(255, 255, 255, 0.1);
+                padding: 20px;
+                border-radius: 10px;
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            }
+
+            .service-box:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 0 20px cyan;
+            }
+
+            .service-box i {
+                font-size: 2rem;
+                color: cyan;
+                margin-bottom: 10px;
+            }
+
+            .service-box h3 {
+                font-size: 1.5rem;
+                margin: 10px 0;
+            }
+
+            .service-box p {
+                font-size: 1rem;
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            .contact form {
+                display: grid;
+                gap: 1rem;
+                max-width: 600px;
+                margin: auto;
+            }
+
+            .contact input, .contact textarea {
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+                font-size: 1rem;
+                transition: background 0.3s ease-in-out;
+            }
+
+            .contact input:focus, .contact textarea:focus {
+                background: rgba(255, 255, 255, 0.2);
+                outline: none;
+            }
+
+            button {
+                background-color: cyan;
+                padding: 12px 30px;
+                border: none;
+                border-radius: 40px;
+                cursor: pointer;
+                font-weight: 700;
+                font-size: 1rem;
+                transition: 0.3s;
+                box-shadow: 0 0 25px cyan;
+            }
+
+            button:hover {
+                background-color: white;
+                color: black;
+                box-shadow: none;
+                transform: scale(1.1);
+            }
+
+            /* Animations */
+            @keyframes fadeInDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes textGlow {
+                0% {
+                    text-shadow: 0 0 20px cyan;
+                }
+                100% {
+                    text-shadow: 0 0 40px cyan;
+                }
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+
+            /* Media Queries for Responsiveness */
+            @media (min-width: 768px) {
+                .hero-container {
+                    grid-template-columns: 1fr 1fr;
+                    padding: 100px 10%;
+                }
+
+                .info-side h1 {
+                    font-size: 4rem;
+                }
+
+                .navbar a {
+                    font-size: 1.2rem;
+                }
+
+                .about, .service, .contact {
+                    padding: 100px 10%;
+                }
+
+                button {
+                    padding: 18px 40px;
+                    font-size: 1.4rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header class="header">
+            <a href="#" class="logo2">Portfolio</a>
+            <nav class="navbar">
+                <a href="#">Home</a>
+                <a href="#About">About</a>
+                <a href="#service">Skills</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
+        <div class="hero-container">
+            <div class="info-side">
+                <h3>Hello, It's Me</h3>
+                <h1>Anjali Santosh</h1>
+                <h3>And I'm a <span>Intern</span></h3>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <button>Download CV</button>
+            </div>
+            <div class="hero-img">
+                <img src="images/20250213_224952.png" alt="Profile Image">
+            </div>
+        </div>
+        <section class="about" id="About">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <button>Read More</button>
+            </div>
+        </section>
+        <section class="service" id="service">
+            <h2>My Services</h2>
+            <div class="service-item">
+                <div class="service-box">
+                    <i class="fa-solid fa-code"></i>
+                    <h3>UI/UX</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+                <div class="service-box">
+                    <i class="fa-solid fa-laptop"></i>
+                    <h3>Video Editing</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+            </div>
+        </section>
+        <section class="contact" id="contact">
+            <h2>Contact Me</h2>
+            <form>
+                <input type="text" placeholder="Name" required>
+                <input type="email" placeholder="Email" required>
+                <textarea placeholder="Message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </body>
+</html>
+
+ 
+ 
+ 
+
+ 
